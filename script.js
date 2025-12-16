@@ -70,12 +70,73 @@ const professionals = [
         location: "الرياض",
         image: "https://randomuser.me/api/portraits/men/85.jpg",
         tags: ["إصلاحات بسيطة"]
+    },
+    {
+        id: 7,
+        name: "شركة البرودة",
+        job: "ac",
+        jobTitle: "فني تكييف وتبريد",
+        rating: 4.6,
+        reviews: 312,
+        price: "150 ر.س / زيارة",
+        location: "جدة",
+        image: "https://randomuser.me/api/portraits/men/12.jpg",
+        tags: ["سبليت", "مركزي", "صيانة"]
+    },
+    {
+        id: 8,
+        name: "أبو ماجد للدهانات",
+        job: "painter",
+        jobTitle: "دهان منازل",
+        rating: 4.3,
+        reviews: 55,
+        price: "20 ر.س / متر",
+        location: "الرياض",
+        image: "https://randomuser.me/api/portraits/men/78.jpg",
+        tags: ["ديكور", "خارجي", "ورق جدران"]
+    },
+    {
+        id: 9,
+        name: "سريع لمكافحة الحشرات",
+        job: "pest_control",
+        jobTitle: "خبير مكافحة",
+        rating: 4.9,
+        reviews: 420,
+        price: "300 ر.س / شقة",
+        location: "الدمام",
+        image: "https://randomuser.me/api/portraits/men/90.jpg",
+        tags: ["نمل أبيض", "صراصير", "ضمان"]
+    },
+    {
+        id: 10,
+        name: "نقليات السعادة",
+        job: "mover",
+        jobTitle: "نقل عفش",
+        rating: 4.0,
+        reviews: 15,
+        price: "حسب الاتفاق",
+        location: "الرياض",
+        image: "https://randomuser.me/api/portraits/men/33.jpg",
+        tags: ["فك وتركيب", "تغليف", "نقل"]
+    },
+    {
+        id: 11,
+        name: "أمينة للنظافة",
+        job: "cleaning",
+        jobTitle: "عاملة نظافة بالساعة",
+        rating: 4.8,
+        reviews: 98,
+        price: "35 ر.س / ساعة",
+        location: "جدة",
+        image: "https://randomuser.me/api/portraits/women/44.jpg",
+        tags: ["منزل", "مكتب", "تعقيم"]
     }
 ];
 
 // State
 let currentCategory = 'all';
 let currentRating = 0;
+let currentCity = 'all';
 let searchTerm = '';
 
 // DOM Elements
@@ -87,26 +148,29 @@ const modalImg = document.getElementById('modal-img');
 const modalName = document.getElementById('modal-name');
 const modalJob = document.getElementById('modal-job');
 const searchInput = document.getElementById('searchName');
+const cityFilter = document.getElementById('cityFilter');
 const notification = document.getElementById('notification');
 const bookingForm = document.getElementById('booking-form');
 
 // Initial Render
 document.addEventListener('DOMContentLoaded', () => {
-    renderList();
-    
-    // Search Listener
-    searchInput.addEventListener('input', (e) => {
-        searchTerm = e.target.value.toLowerCase();
+    if(grid) {
         renderList();
-    });
+        
+        // Search Listener
+        searchInput.addEventListener('input', (e) => {
+            searchTerm = e.target.value.toLowerCase();
+            renderList();
+        });
 
-    // Form Submit
-    bookingForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        closeModal();
-        showNotification();
-        bookingForm.reset();
-    });
+        // Form Submit
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            closeModal();
+            showNotification();
+            bookingForm.reset();
+        });
+    }
 });
 
 // Render Function
@@ -116,8 +180,9 @@ function renderList() {
     const filtered = professionals.filter(pro => {
         const matchCategory = currentCategory === 'all' || pro.job === currentCategory;
         const matchRating = pro.rating >= currentRating;
-        const matchSearch = pro.name.toLowerCase().includes(searchTerm);
-        return matchCategory && matchRating && matchSearch;
+        const matchCity = currentCity === 'all' || pro.location === currentCity;
+        const matchSearch = pro.name.toLowerCase().includes(searchTerm) || pro.jobTitle.toLowerCase().includes(searchTerm);
+        return matchCategory && matchRating && matchSearch && matchCity;
     });
 
     countSpan.textContent = filtered.length;
@@ -181,12 +246,23 @@ function createCard(pro) {
 // Filter Handlers
 function filterByCategory(category) {
     currentCategory = category;
-    // Update Buttons UI
+    // Highlight active button
     document.querySelectorAll('.category-btn').forEach(btn => {
-        // A simpler way to handle active state styles could be added here
-        // For now, we just re-render
+        if(btn.textContent.includes(getCategoryLabel(category))) {
+            // Basic logic to show active state roughly (UI handles better with CSS classes usually)
+            btn.classList.add('bg-white', 'text-indigo-800');
+            btn.classList.remove('bg-white/10', 'text-white');
+        } else {
+             // This part is simplified for demo; ideally we use ID or data-attributes
+        }
     });
     renderList();
+}
+
+// Helper for labels (simplified)
+function getCategoryLabel(cat) {
+    // This is just a helper for the button logic above if needed
+    return ''; 
 }
 
 function filterByRating(rating) {
@@ -194,13 +270,19 @@ function filterByRating(rating) {
     renderList();
 }
 
+function filterByCity() {
+    currentCity = cityFilter.value;
+    renderList();
+}
+
 function resetFilters() {
     currentCategory = 'all';
     currentRating = 0;
+    currentCity = 'all';
     searchTerm = '';
     searchInput.value = '';
+    cityFilter.value = 'all';
     
-    // Reset radio buttons
     const radios = document.getElementsByName('rating');
     for(let r of radios) r.checked = false;
     radios[2].checked = true; // Select 'All'
@@ -224,10 +306,11 @@ function closeModal() {
     bookingModal.classList.add('hidden');
 }
 
-// Close modal if clicked outside
-bookingModal.addEventListener('click', (e) => {
-    if (e.target === bookingModal) closeModal();
-});
+if(bookingModal) {
+    bookingModal.addEventListener('click', (e) => {
+        if (e.target === bookingModal) closeModal();
+    });
+}
 
 // Notification
 function showNotification() {
