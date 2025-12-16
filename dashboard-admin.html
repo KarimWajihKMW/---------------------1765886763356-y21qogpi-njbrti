@@ -17,16 +17,16 @@
                 <h1 class="text-xl font-bold">لوحة الإدارة</h1>
             </div>
             <nav class="flex-1 p-2 space-y-1">
-                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 rounded-lg">
+                <a href="#" onclick="showSection('stats')" class="nav-link flex items-center gap-3 px-4 py-3 bg-indigo-600 rounded-lg">
                     <span>📊</span> الإحصائيات
                 </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700 rounded-lg transition">
+                <a href="#" onclick="showSection('users')" class="nav-link flex items-center gap-3 px-4 py-3 hover:bg-slate-700 rounded-lg transition">
                     <span>👥</span> المستخدمين
                 </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700 rounded-lg transition">
+                <a href="#" onclick="showSection('professionals')" class="nav-link flex items-center gap-3 px-4 py-3 hover:bg-slate-700 rounded-lg transition">
                     <span>👷</span> المهنيين <span class="bg-red-500 text-xs px-2 py-0.5 rounded-full mr-auto">جديد</span>
                 </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700 rounded-lg transition">
+                <a href="#" onclick="showSection('transactions')" class="nav-link flex items-center gap-3 px-4 py-3 hover:bg-slate-700 rounded-lg transition">
                     <span>💰</span> العمليات المالية
                 </a>
             </nav>
@@ -39,7 +39,7 @@
         <main class="flex-1 p-8">
             <header class="flex justify-between items-center mb-8">
                 <div>
-                    <h2 class="text-2xl font-bold text-slate-800">نظرة عامة</h2>
+                    <h2 id="section-title" class="text-2xl font-bold text-slate-800">نظرة عامة</h2>
                     <p class="text-slate-500">آخر تحديث: قبل 5 دقائق</p>
                 </div>
                 <div class="flex gap-3">
@@ -50,83 +50,232 @@
                 </div>
             </header>
 
-            <!-- Stats Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-500">
-                    <p class="text-gray-500 text-sm font-bold">إجمالي المستخدمين</p>
-                    <h3 class="text-3xl font-bold mt-2">12,340</h3>
-                    <span class="text-green-500 text-xs font-bold">+12% نمو</span>
+            <!-- Stats Section -->
+            <div id="stats-section" class="section-content">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-500">
+                        <p class="text-gray-500 text-sm font-bold">إجمالي المستخدمين</p>
+                        <h3 class="text-3xl font-bold mt-2">12,340</h3>
+                        <span class="text-green-500 text-xs font-bold">+12% نمو</span>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-500">
+                        <p class="text-gray-500 text-sm font-bold">المهنيين النشطين</p>
+                        <h3 class="text-3xl font-bold mt-2">850</h3>
+                        <span class="text-green-500 text-xs font-bold">+5% نمو</span>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-green-500">
+                        <p class="text-gray-500 text-sm font-bold">طلبات اليوم</p>
+                        <h3 class="text-3xl font-bold mt-2">142</h3>
+                        <span class="text-gray-400 text-xs">متوسط 120</span>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-yellow-500">
+                        <p class="text-gray-500 text-sm font-bold">إيرادات الشهر</p>
+                        <h3 class="text-3xl font-bold mt-2">45,200</h3>
+                        <span class="text-xs text-gray-400">ر.س</span>
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-500">
-                    <p class="text-gray-500 text-sm font-bold">المهنيين النشطين</p>
-                    <h3 class="text-3xl font-bold mt-2">850</h3>
-                    <span class="text-green-500 text-xs font-bold">+5% نمو</span>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-green-500">
-                    <p class="text-gray-500 text-sm font-bold">طلبات اليوم</p>
-                    <h3 class="text-3xl font-bold mt-2">142</h3>
-                    <span class="text-gray-400 text-xs">متوسط 120</span>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-yellow-500">
-                    <p class="text-gray-500 text-sm font-bold">إيرادات الشهر</p>
-                    <h3 class="text-3xl font-bold mt-2">45,200</h3>
-                    <span class="text-xs text-gray-400">ر.س</span>
+
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+                        <h3 class="font-bold text-lg">مهنيون بانتظار الموافقة</h3>
+                        <button onclick="showSection('professionals')" class="text-indigo-600 text-sm font-bold hover:underline">عرض الكل</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-right">
+                            <thead class="bg-gray-50 text-gray-500 text-xs uppercase">
+                                <tr>
+                                    <th class="p-4">الاسم</th>
+                                    <th class="p-4">المهنة</th>
+                                    <th class="p-4">المدينة</th>
+                                    <th class="p-4">تاريخ التسجيل</th>
+                                    <th class="p-4">الإجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-gray-100">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 font-bold">علي حسن الغامدي</td>
+                                    <td class="p-4">فني تكييف</td>
+                                    <td class="p-4">جدة</td>
+                                    <td class="p-4">منذ ساعتين</td>
+                                    <td class="p-4 flex gap-2">
+                                        <button onclick="approvePro(1)" class="bg-green-100 text-green-700 px-3 py-1 rounded hover:bg-green-200 font-bold text-xs">موافقة</button>
+                                        <button onclick="rejectPro(1)" class="bg-red-100 text-red-700 px-3 py-1 rounded hover:bg-red-200 font-bold text-xs">رفض</button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 font-bold">مؤسسة الإنجاز السريع</td>
+                                    <td class="p-4">نقل عفش</td>
+                                    <td class="p-4">الرياض</td>
+                                    <td class="p-4">أمس</td>
+                                    <td class="p-4 flex gap-2">
+                                        <button onclick="approvePro(2)" class="bg-green-100 text-green-700 px-3 py-1 rounded hover:bg-green-200 font-bold text-xs">موافقة</button>
+                                        <button onclick="rejectPro(2)" class="bg-red-100 text-red-700 px-3 py-1 rounded hover:bg-red-200 font-bold text-xs">رفض</button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 font-bold">محمد إبراهيم</td>
+                                    <td class="p-4">كهربائي</td>
+                                    <td class="p-4">الدمام</td>
+                                    <td class="p-4">أمس</td>
+                                    <td class="p-4 flex gap-2">
+                                        <button onclick="approvePro(3)" class="bg-green-100 text-green-700 px-3 py-1 rounded hover:bg-green-200 font-bold text-xs">موافقة</button>
+                                        <button onclick="rejectPro(3)" class="bg-red-100 text-red-700 px-3 py-1 rounded hover:bg-red-200 font-bold text-xs">رفض</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            <!-- Approval Table -->
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                <div class="p-6 border-b border-gray-100 flex justify-between items-center">
-                    <h3 class="font-bold text-lg">مهنيون بانتظار الموافقة</h3>
-                    <button class="text-indigo-600 text-sm font-bold hover:underline">عرض الكل</button>
+            <!-- Users Section -->
+            <div id="users-section" class="section-content hidden">
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+                        <h3 class="font-bold text-lg">قائمة المستخدمين</h3>
+                        <input type="text" placeholder="بحث..." class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-right">
+                            <thead class="bg-gray-50 text-gray-500 text-xs uppercase">
+                                <tr>
+                                    <th class="p-4">الاسم</th>
+                                    <th class="p-4">البريد الإلكتروني</th>
+                                    <th class="p-4">رقم الجوال</th>
+                                    <th class="p-4">تاريخ التسجيل</th>
+                                    <th class="p-4">الحالة</th>
+                                    <th class="p-4">الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-gray-100">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 font-bold">عبد العزيز محمد</td>
+                                    <td class="p-4">aziz@example.com</td>
+                                    <td class="p-4">0501234567</td>
+                                    <td class="p-4">2024-01-15</td>
+                                    <td class="p-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">نشط</span></td>
+                                    <td class="p-4">
+                                        <button onclick="viewUser(1)" class="text-indigo-600 hover:underline text-xs">عرض</button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 font-bold">نورة أحمد</td>
+                                    <td class="p-4">noura@example.com</td>
+                                    <td class="p-4">0559876543</td>
+                                    <td class="p-4">2024-02-10</td>
+                                    <td class="p-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">نشط</span></td>
+                                    <td class="p-4">
+                                        <button onclick="viewUser(2)" class="text-indigo-600 hover:underline text-xs">عرض</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-right">
-                        <thead class="bg-gray-50 text-gray-500 text-xs uppercase">
-                            <tr>
-                                <th class="p-4">الاسم</th>
-                                <th class="p-4">المهنة</th>
-                                <th class="p-4">المدينة</th>
-                                <th class="p-4">تاريخ التسجيل</th>
-                                <th class="p-4">الإجراء</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-sm divide-y divide-gray-100">
-                            <tr class="hover:bg-gray-50">
-                                <td class="p-4 font-bold">علي حسن الغامدي</td>
-                                <td class="p-4">فني تكييف</td>
-                                <td class="p-4">جدة</td>
-                                <td class="p-4">منذ ساعتين</td>
-                                <td class="p-4 flex gap-2">
-                                    <button class="bg-green-100 text-green-700 px-3 py-1 rounded hover:bg-green-200 font-bold text-xs">موافقة</button>
-                                    <button class="bg-red-100 text-red-700 px-3 py-1 rounded hover:bg-red-200 font-bold text-xs">رفض</button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="p-4 font-bold">مؤسسة الإنجاز السريع</td>
-                                <td class="p-4">نقل عفش</td>
-                                <td class="p-4">الرياض</td>
-                                <td class="p-4">أمس</td>
-                                <td class="p-4 flex gap-2">
-                                    <button class="bg-green-100 text-green-700 px-3 py-1 rounded hover:bg-green-200 font-bold text-xs">موافقة</button>
-                                    <button class="bg-red-100 text-red-700 px-3 py-1 rounded hover:bg-red-200 font-bold text-xs">رفض</button>
-                                </td>
-                            </tr>
-                             <tr class="hover:bg-gray-50">
-                                <td class="p-4 font-bold">محمد إبراهيم</td>
-                                <td class="p-4">كهربائي</td>
-                                <td class="p-4">الدمام</td>
-                                <td class="p-4">أمس</td>
-                                <td class="p-4 flex gap-2">
-                                    <button class="bg-green-100 text-green-700 px-3 py-1 rounded hover:bg-green-200 font-bold text-xs">موافقة</button>
-                                    <button class="bg-red-100 text-red-700 px-3 py-1 rounded hover:bg-red-200 font-bold text-xs">رفض</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            </div>
+
+            <!-- Professionals Section -->
+            <div id="professionals-section" class="section-content hidden">
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+                        <h3 class="font-bold text-lg">قائمة المهنيين</h3>
+                        <div class="flex gap-2">
+                            <select class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
+                                <option>الكل</option>
+                                <option>معتمد</option>
+                                <option>قيد المراجعة</option>
+                                <option>مرفوض</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-right">
+                            <thead class="bg-gray-50 text-gray-500 text-xs uppercase">
+                                <tr>
+                                    <th class="p-4">الاسم</th>
+                                    <th class="p-4">المهنة</th>
+                                    <th class="p-4">المدينة</th>
+                                    <th class="p-4">التقييم</th>
+                                    <th class="p-4">الحالة</th>
+                                    <th class="p-4">الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-gray-100">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 font-bold">أحمد محمد</td>
+                                    <td class="p-4">سباك</td>
+                                    <td class="p-4">الرياض</td>
+                                    <td class="p-4">⭐ 4.8</td>
+                                    <td class="p-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">معتمد</span></td>
+                                    <td class="p-4">
+                                        <button onclick="viewPro(1)" class="text-indigo-600 hover:underline text-xs">عرض</button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 font-bold">علي حسن الغامدي</td>
+                                    <td class="p-4">فني تكييف</td>
+                                    <td class="p-4">جدة</td>
+                                    <td class="p-4">-</td>
+                                    <td class="p-4"><span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs">قيد المراجعة</span></td>
+                                    <td class="p-4 flex gap-2">
+                                        <button onclick="approvePro(1)" class="bg-green-100 text-green-700 px-3 py-1 rounded hover:bg-green-200 font-bold text-xs">موافقة</button>
+                                        <button onclick="rejectPro(1)" class="bg-red-100 text-red-700 px-3 py-1 rounded hover:bg-red-200 font-bold text-xs">رفض</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Section -->
+            <div id="transactions-section" class="section-content hidden">
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+                        <h3 class="font-bold text-lg">العمليات المالية</h3>
+                        <select class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
+                            <option>آخر 30 يوم</option>
+                            <option>آخر 7 أيام</option>
+                            <option>هذا الشهر</option>
+                        </select>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-right">
+                            <thead class="bg-gray-50 text-gray-500 text-xs uppercase">
+                                <tr>
+                                    <th class="p-4">رقم العملية</th>
+                                    <th class="p-4">العميل</th>
+                                    <th class="p-4">المهني</th>
+                                    <th class="p-4">المبلغ</th>
+                                    <th class="p-4">التاريخ</th>
+                                    <th class="p-4">الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-gray-100">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 font-bold">#12345</td>
+                                    <td class="p-4">عبد العزيز محمد</td>
+                                    <td class="p-4">أحمد محمد</td>
+                                    <td class="p-4 font-bold text-green-600">150 ر.س</td>
+                                    <td class="p-4">2024-03-15</td>
+                                    <td class="p-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">مكتمل</span></td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 font-bold">#12344</td>
+                                    <td class="p-4">نورة أحمد</td>
+                                    <td class="p-4">سعيد العلي</td>
+                                    <td class="p-4 font-bold text-green-600">180 ر.س</td>
+                                    <td class="p-4">2024-03-14</td>
+                                    <td class="p-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">مكتمل</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <script src="dashboard-admin.js"></script>
 </body>
 </html>
