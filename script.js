@@ -133,13 +133,11 @@ const professionals = [
     }
 ];
 
-// State
 let currentCategory = 'all';
 let currentRating = 0;
 let currentCity = 'all';
 let searchTerm = '';
 
-// DOM Elements
 const grid = document.getElementById('professionals-grid');
 const countSpan = document.getElementById('count');
 const emptyState = document.getElementById('empty-state');
@@ -151,29 +149,51 @@ const searchInput = document.getElementById('searchName');
 const cityFilter = document.getElementById('cityFilter');
 const notification = document.getElementById('notification');
 const bookingForm = document.getElementById('booking-form');
+const loginModal = document.getElementById('login-modal');
+const signupModal = document.getElementById('signup-modal');
+const loginForm = document.getElementById('login-form');
+const signupForm = document.getElementById('signup-form');
 
-// Initial Render
 document.addEventListener('DOMContentLoaded', () => {
     if(grid) {
         renderList();
         
-        // Search Listener
         searchInput.addEventListener('input', (e) => {
             searchTerm = e.target.value.toLowerCase();
             renderList();
         });
 
-        // Form Submit
         bookingForm.addEventListener('submit', (e) => {
             e.preventDefault();
             closeModal();
             showNotification();
             bookingForm.reset();
         });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const accountType = 'client';
+            closeLoginModal();
+            if(accountType === 'client') {
+                window.location.href = 'dashboard-client.html';
+            } else {
+                window.location.href = 'dashboard-pro.html';
+            }
+        });
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const accountType = document.querySelector('input[name="accountType"]:checked').value;
+            closeSignupModal();
+            if(accountType === 'client') {
+                window.location.href = 'dashboard-client.html';
+            } else {
+                window.location.href = 'dashboard-pro.html';
+            }
+        });
     }
 });
 
-// Render Function
 function renderList() {
     grid.innerHTML = '';
     
@@ -198,12 +218,10 @@ function renderList() {
     }
 }
 
-// Create HTML Card
 function createCard(pro) {
     const div = document.createElement('div');
     div.className = 'bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100 flex flex-col';
     
-    // Stars Generator
     const stars = Array(5).fill(0).map((_, i) => 
         `<svg class="w-4 h-4 ${i < Math.floor(pro.rating) ? 'text-yellow-400' : 'text-gray-300'}" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`
     ).join('');
@@ -243,26 +261,9 @@ function createCard(pro) {
     return div;
 }
 
-// Filter Handlers
 function filterByCategory(category) {
     currentCategory = category;
-    // Highlight active button
-    document.querySelectorAll('.category-btn').forEach(btn => {
-        if(btn.textContent.includes(getCategoryLabel(category))) {
-            // Basic logic to show active state roughly (UI handles better with CSS classes usually)
-            btn.classList.add('bg-white', 'text-indigo-800');
-            btn.classList.remove('bg-white/10', 'text-white');
-        } else {
-             // This part is simplified for demo; ideally we use ID or data-attributes
-        }
-    });
     renderList();
-}
-
-// Helper for labels (simplified)
-function getCategoryLabel(cat) {
-    // This is just a helper for the button logic above if needed
-    return ''; 
 }
 
 function filterByRating(rating) {
@@ -285,12 +286,11 @@ function resetFilters() {
     
     const radios = document.getElementsByName('rating');
     for(let r of radios) r.checked = false;
-    radios[2].checked = true; // Select 'All'
+    radios[2].checked = true;
 
     renderList();
 }
 
-// Modal Handlers
 function openModal(id) {
     const pro = professionals.find(p => p.id === id);
     if (!pro) return;
@@ -306,13 +306,40 @@ function closeModal() {
     bookingModal.classList.add('hidden');
 }
 
+function openLoginModal() {
+    loginModal.classList.remove('hidden');
+}
+
+function closeLoginModal() {
+    loginModal.classList.add('hidden');
+}
+
+function openSignupModal() {
+    signupModal.classList.remove('hidden');
+}
+
+function closeSignupModal() {
+    signupModal.classList.add('hidden');
+}
+
 if(bookingModal) {
     bookingModal.addEventListener('click', (e) => {
         if (e.target === bookingModal) closeModal();
     });
 }
 
-// Notification
+if(loginModal) {
+    loginModal.addEventListener('click', (e) => {
+        if (e.target === loginModal) closeLoginModal();
+    });
+}
+
+if(signupModal) {
+    signupModal.addEventListener('click', (e) => {
+        if (e.target === signupModal) closeSignupModal();
+    });
+}
+
 function showNotification() {
     notification.classList.remove('translate-y-20', 'opacity-0');
     setTimeout(() => {
