@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حرفي - سوق الخدمات المهنية</title>
+    <title>حرفي - سوق الخدمات المهنية الشامل</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -13,6 +13,7 @@
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
+        height: 8px;
       }
       ::-webkit-scrollbar-track {
         background: #f1f1f1;
@@ -24,6 +25,13 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #94a3b8;
       }
+      .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
     </style>
 </head>
 <body class="bg-slate-50 text-gray-800">
@@ -32,44 +40,71 @@
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <div class="bg-indigo-600 text-white p-2 rounded-lg">
+                <a href="index.html" class="bg-indigo-600 text-white p-2 rounded-lg flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
                     </svg>
-                </div>
-                <h1 class="text-2xl font-bold text-indigo-900">حرفي</h1>
+                </a>
+                <h1 class="text-2xl font-bold text-indigo-900"><a href="index.html">حرفي</a></h1>
             </div>
-            <div class="hidden md:flex gap-6 font-semibold text-gray-600">
-                <a href="#" class="hover:text-indigo-600 transition">الرئيسية</a>
-                <a href="#Services" class="hover:text-indigo-600 transition">الخدمات</a>
-                <a href="#" class="hover:text-indigo-600 transition">انضم كمهني</a>
+            
+            <!-- Demo Links for Dashboard Access -->
+            <div class="hidden md:flex gap-4 text-sm">
+                <a href="dashboard-client.html" class="text-gray-600 hover:text-indigo-600">لوحة العميل</a>
+                <span class="text-gray-300">|</span>
+                <a href="dashboard-pro.html" class="text-gray-600 hover:text-indigo-600">لوحة المهني</a>
+                <span class="text-gray-300">|</span>
+                <a href="dashboard-admin.html" class="text-gray-600 hover:text-indigo-600">لوحة الإدارة</a>
             </div>
-            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full font-bold transition shadow-md">
-                تسجيل الدخول
-            </button>
+
+            <div class="flex gap-3">
+                <button class="md:hidden text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+                <button class="hidden md:block bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full font-bold transition shadow-md">
+                    تسجيل الدخول
+                </button>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16">
+    <header class="bg-gradient-to-r from-indigo-800 to-indigo-600 text-white py-16">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">اعثر على أفضل الحرفيين<br>في منطقتك خلال دقائق</h2>
-            <p class="text-indigo-100 text-lg mb-8 max-w-2xl mx-auto">سباكة، كهرباء، نجارة، وكل ما يحتاجه منزلك. مهنيون موثوقون وتقييمات حقيقية.</p>
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">سوق الخدمات الشامل<br>لكل ما يحتاجه منزلك وعملك</h2>
+            <p class="text-indigo-100 text-lg mb-8 max-w-2xl mx-auto">من السباكة والكهرباء إلى التصميم والبرمجة. نجمع لك أفضل المحترفين في مكان واحد.</p>
             
-            <!-- Quick Filters (Hero) -->
-            <div class="flex flex-wrap justify-center gap-4 mb-8">
-                <button onclick="filterByCategory('all')" class="category-btn active bg-white text-indigo-700 px-6 py-3 rounded-full font-bold shadow-lg hover:bg-indigo-50 transition border-2 border-transparent hover:border-indigo-300">
-                    الكل
-                </button>
-                <button onclick="filterByCategory('plumber')" class="category-btn bg-white/20 backdrop-blur-sm hover:bg-white hover:text-indigo-700 px-6 py-3 rounded-full font-bold border border-white/30 transition">
-                    🚿 سباك
-                </button>
-                <button onclick="filterByCategory('electrician')" class="category-btn bg-white/20 backdrop-blur-sm hover:bg-white hover:text-indigo-700 px-6 py-3 rounded-full font-bold border border-white/30 transition">
-                    💡 كهربائي
-                </button>
-                <button onclick="filterByCategory('carpenter')" class="category-btn bg-white/20 backdrop-blur-sm hover:bg-white hover:text-indigo-700 px-6 py-3 rounded-full font-bold border border-white/30 transition">
-                    🪑 نجار
-                </button>
+            <!-- Enhanced Quick Filters (Scrollable) -->
+            <div class="relative max-w-4xl mx-auto">
+                <div class="flex gap-3 overflow-x-auto pb-4 px-2 hide-scrollbar justify-start md:justify-center snap-x">
+                    <button onclick="filterByCategory('all')" class="category-btn active snap-center shrink-0 bg-white text-indigo-800 px-6 py-3 rounded-full font-bold shadow-lg border-2 border-transparent whitespace-nowrap hover:bg-indigo-50 transition">
+                        الكل
+                    </button>
+                    <button onclick="filterByCategory('plumber')" class="category-btn snap-center shrink-0 bg-white/10 hover:bg-white hover:text-indigo-800 px-5 py-3 rounded-full font-bold border border-white/20 whitespace-nowrap backdrop-blur-sm transition">
+                        🚿 سباكة
+                    </button>
+                    <button onclick="filterByCategory('electrician')" class="category-btn snap-center shrink-0 bg-white/10 hover:bg-white hover:text-indigo-800 px-5 py-3 rounded-full font-bold border border-white/20 whitespace-nowrap backdrop-blur-sm transition">
+                        💡 كهرباء
+                    </button>
+                    <button onclick="filterByCategory('carpenter')" class="category-btn snap-center shrink-0 bg-white/10 hover:bg-white hover:text-indigo-800 px-5 py-3 rounded-full font-bold border border-white/20 whitespace-nowrap backdrop-blur-sm transition">
+                        🪑 نجارة
+                    </button>
+                    <button onclick="filterByCategory('ac')" class="category-btn snap-center shrink-0 bg-white/10 hover:bg-white hover:text-indigo-800 px-5 py-3 rounded-full font-bold border border-white/20 whitespace-nowrap backdrop-blur-sm transition">
+                        ❄️ تكييف
+                    </button>
+                    <button onclick="filterByCategory('painter')" class="category-btn snap-center shrink-0 bg-white/10 hover:bg-white hover:text-indigo-800 px-5 py-3 rounded-full font-bold border border-white/20 whitespace-nowrap backdrop-blur-sm transition">
+                        🎨 دهانات
+                    </button>
+                    <button onclick="filterByCategory('pest_control')" class="category-btn snap-center shrink-0 bg-white/10 hover:bg-white hover:text-indigo-800 px-5 py-3 rounded-full font-bold border border-white/20 whitespace-nowrap backdrop-blur-sm transition">
+                        🐜 مكافحة حشرات
+                    </button>
+                    <button onclick="filterByCategory('mover')" class="category-btn snap-center shrink-0 bg-white/10 hover:bg-white hover:text-indigo-800 px-5 py-3 rounded-full font-bold border border-white/20 whitespace-nowrap backdrop-blur-sm transition">
+                        📦 نقل عفش
+                    </button>
+                    <button onclick="filterByCategory('cleaning')" class="category-btn snap-center shrink-0 bg-white/10 hover:bg-white hover:text-indigo-800 px-5 py-3 rounded-full font-bold border border-white/20 whitespace-nowrap backdrop-blur-sm transition">
+                        🧹 نظافة
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -81,13 +116,24 @@
         <aside class="w-full md:w-1/4">
             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 sticky top-24">
                 <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-bold text-lg">تصفية البحث</h3>
+                    <h3 class="font-bold text-lg">تصفية متقدمة</h3>
                     <button onclick="resetFilters()" class="text-xs text-indigo-600 hover:underline">إعادة تعيين</button>
                 </div>
                 
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">البحث بالاسم</label>
-                    <input type="text" id="searchName" placeholder="اسم الحرفي..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                    <input type="text" id="searchName" placeholder="اسم الحرفي أو الشركة..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">المدينة</label>
+                    <select id="cityFilter" onchange="filterByCity()" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none bg-white">
+                        <option value="all">كل المدن</option>
+                        <option value="الرياض">الرياض</option>
+                        <option value="جدة">جدة</option>
+                        <option value="الدمام">الدمام</option>
+                        <option value="مكة">مكة</option>
+                    </select>
                 </div>
 
                 <div class="mb-6">
