@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة المهني - حرفي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Cairo', sans-serif; }</style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <div class="flex min-h-screen">
+        
+        <!-- Sidebar -->
+        <aside class="hidden lg:flex flex-col w-64 bg-slate-900 text-slate-300">
+            <div class="p-6 border-b border-slate-800 flex items-center gap-2">
+                <h1 class="text-xl font-bold text-white">حرفي <span class="text-xs bg-indigo-500 px-2 py-0.5 rounded text-white">أعمال</span></h1>
+            </div>
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-lg font-bold">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    نظرة عامة
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-800 rounded-lg font-medium transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    جدولي
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-800 rounded-lg font-medium transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    الأرباح
+                </a>
+            </nav>
+            <div class="p-4">
+                <a href="index.html" class="flex items-center gap-2 text-red-400 font-medium hover:bg-slate-800 p-3 rounded-lg transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    تسجيل الخروج
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col">
+            <div class="p-6 lg:p-10 space-y-8">
+                <!-- Status Bar -->
+                <div class="flex flex-wrap justify-between items-center bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-14 h-14 rounded-full border-4 border-indigo-50">
+                        <div>
+                            <h2 class="font-bold text-lg">أحمد محمد</h2>
+                            <div class="flex items-center gap-2 text-sm text-gray-500">
+                                <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                متاح لاستقبال الطلبات
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 mt-4 sm:mt-0">
+                        <div class="text-center px-4 border-l">
+                            <span class="block font-bold text-xl">4.8</span>
+                            <span class="text-xs text-gray-400">التقييم</span>
+                        </div>
+                        <div class="text-center px-4">
+                            <span class="block font-bold text-xl">92%</span>
+                            <span class="text-xs text-gray-400">معدل القبول</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Incoming Requests -->
+                <section>
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+                        طلبات جديدة 
+                        <span class="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">2</span>
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Request Card 1 -->
+                        <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-r-indigo-500">
+                            <div class="flex justify-between mb-4">
+                                <div>
+                                    <h4 class="font-bold">عبد الله - صيانة طارئة</h4>
+                                    <p class="text-sm text-gray-500">حي النخيل، الرياض</p>
+                                </div>
+                                <span class="text-sm font-bold text-indigo-600">50 ر.س/س</span>
+                            </div>
+                            <p class="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg mb-4">
+                                "يوجد تسريب مياه قوي تحت حوض المطبخ واحتاج إصلاح فوري."
+                            </p>
+                            <div class="flex gap-3">
+                                <button class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg font-bold transition">قبول الطلب</button>
+                                <button class="flex-1 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 py-2 rounded-lg font-bold transition">رفض</button>
+                            </div>
+                        </div>
+
+                        <!-- Request Card 2 -->
+                         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 opacity-75">
+                            <div class="flex justify-between mb-4">
+                                <div>
+                                    <h4 class="font-bold">أميرة - تركيبات</h4>
+                                    <p class="text-sm text-gray-500">حي الملقا، الرياض</p>
+                                </div>
+                                <span class="text-sm font-bold text-indigo-600">50 ر.س/س</span>
+                            </div>
+                            <p class="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg mb-4">
+                                "تركيب خلاطات مياه جديدة للحمامات."
+                            </p>
+                            <div class="flex gap-3">
+                                <button class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg font-bold transition">قبول الطلب</button>
+                                <button class="flex-1 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 py-2 rounded-lg font-bold transition">رفض</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Upcoming Schedule -->
+                <section>
+                     <h3 class="font-bold text-lg mb-4">جدول اليوم</h3>
+                     <div class="space-y-3">
+                         <div class="bg-white p-4 rounded-xl border border-gray-100 flex items-center gap-4">
+                             <div class="bg-indigo-100 text-indigo-700 font-bold p-3 rounded-lg text-center min-w-[70px]">
+                                 <span class="block text-xl">10:00</span>
+                                 <span class="text-xs">ص</span>
+                             </div>
+                             <div>
+                                 <h4 class="font-bold">موعد مع: خالد العتيبي</h4>
+                                 <p class="text-sm text-gray-500">تأسيس سباكة فيلا جديدة</p>
+                             </div>
+                             <div class="mr-auto">
+                                 <button class="text-sm text-indigo-600 hover:underline">التفاصيل</button>
+                             </div>
+                         </div>
+                         <div class="bg-white p-4 rounded-xl border border-gray-100 flex items-center gap-4">
+                             <div class="bg-gray-100 text-gray-600 font-bold p-3 rounded-lg text-center min-w-[70px]">
+                                 <span class="block text-xl">04:30</span>
+                                 <span class="text-xs">م</span>
+                             </div>
+                             <div>
+                                 <h4 class="font-bold">موعد مع: سارة محمد</h4>
+                                 <p class="text-sm text-gray-500">صيانة فلاتر</p>
+                             </div>
+                             <div class="mr-auto">
+                                 <button class="text-sm text-indigo-600 hover:underline">التفاصيل</button>
+                             </div>
+                         </div>
+                     </div>
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
